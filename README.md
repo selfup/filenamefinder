@@ -35,7 +35,13 @@ user    0m4.960s
 sys     0m2.708s
 ```
 
+---
+
 Performance is quite similar to `find` but this is such little code I figured why not.
+
+You can also use this in your go projects and not have to exec a shell command.
+
+That's nice too.
 
 ### Use as a lib
 
