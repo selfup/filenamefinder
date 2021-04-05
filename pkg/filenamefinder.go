@@ -67,13 +67,14 @@ func (f *FileSizeFinder) findFiles(directory string, prefix string) {
 	}
 
 	dirLen := len(dirs)
+
 	if dirLen > 0 {
 		var dirGroup sync.WaitGroup
 		dirGroup.Add(dirLen)
 
 		for _, dir := range dirs {
-			go func(localDir os.FileInfo, localDirectory string, localDirection string) {
-				f.findFiles(localDirectory+localDirection+localDir.Name(), localDirectory)
+			go func(localDirectory os.FileInfo, localPrefix string, osDirection string) {
+				f.findFiles(localPrefix+osDirection+localDirectory.Name(), localPrefix)
 				dirGroup.Done()
 			}(dir, directory, f.Direction)
 		}
