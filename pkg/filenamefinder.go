@@ -41,6 +41,7 @@ func (f *FileSizeFinder) Scan(directory string) {
 	f.findFiles(directory, "")
 }
 
+// The prefix is needed when the goroutines fire off
 func (f *FileSizeFinder) findFiles(directory string, prefix string) {
 	paths, _ := ioutil.ReadDir(directory)
 
@@ -71,8 +72,8 @@ func (f *FileSizeFinder) findFiles(directory string, prefix string) {
 		dirGroup.Add(dirLen)
 
 		for _, dir := range dirs {
-			go func(diR os.FileInfo, direcTory string, direcTion string) {
-				f.findFiles(direcTory+direcTion+diR.Name(), direcTory)
+			go func(localDir os.FileInfo, localDirectory string, localDirection string) {
+				f.findFiles(localDirectory+localDirection+localDir.Name(), localDirectory)
 				dirGroup.Done()
 			}(dir, directory, f.Direction)
 		}
