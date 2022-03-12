@@ -8,9 +8,9 @@ import (
 	"sync"
 )
 
-// NewFileNameFinder creates a pointer to FileSizeFinder with default values
-func NewFileNameFinder(keywords []string) *FileSizeFinder {
-	fsf := new(FileSizeFinder)
+// NewFileNameFinder creates a pointer to FileNameFinder with default values
+func NewFileNameFinder(keywords []string) *FileNameFinder {
+	fsf := new(FileNameFinder)
 
 	if runtime.GOOS == "windows" {
 		fsf.Direction = "\\"
@@ -23,8 +23,8 @@ func NewFileNameFinder(keywords []string) *FileSizeFinder {
 	return fsf
 }
 
-// FileSizeFinder struct contains needed data to perform concurrent operations
-type FileSizeFinder struct {
+// FileNameFinder struct contains needed data to perform concurrent operations
+type FileNameFinder struct {
 	mutex     sync.Mutex
 	Direction string
 	Files     []string
@@ -32,7 +32,7 @@ type FileSizeFinder struct {
 }
 
 // Scan is a concurrent/parallel directory walker
-func (f *FileSizeFinder) Scan(directory string) {
+func (f *FileNameFinder) Scan(directory string) {
 	_, err := ioutil.ReadDir(directory)
 	if err != nil {
 		panic(err)
@@ -42,7 +42,7 @@ func (f *FileSizeFinder) Scan(directory string) {
 }
 
 // The prefix is needed when the goroutines fire off
-func (f *FileSizeFinder) findFiles(directory string, prefix string) {
+func (f *FileNameFinder) findFiles(directory string, prefix string) {
 	paths, _ := ioutil.ReadDir(directory)
 
 	var dirs []os.FileInfo

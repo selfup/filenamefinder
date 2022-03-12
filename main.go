@@ -10,10 +10,10 @@ import (
 
 func main() {
 	var paths string
-	flag.StringVar(&paths, "p", "", "absolute path - can be comma delimited")
+	flag.StringVar(&paths, "path", "", "absolute path - can be comma delimited")
 
 	var keywords string
-	flag.StringVar(&keywords, "k", "", "keyword(s) for the filename - can be comma delimited")
+	flag.StringVar(&keywords, "keywords", "", "keyword(s) for the filename - can be comma delimited")
 
 	flag.Parse()
 

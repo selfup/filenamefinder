@@ -4,13 +4,12 @@ Concurrent, recursive, file name finder.
 
 Can search for multiple keywords in file names.
 
-Pipe friendly so you can grep or xargs all day.
+Output is pipe friendly, so you can grep or xargs all day.
 
 ### Install
 
 ```
-go get github.com/selfup/filenamefinder
-go install github.com/selfup/filenamefinder
+go install github.com/selfup/filenamefinder@latest
 ```
 
 ### Use
@@ -18,16 +17,16 @@ go install github.com/selfup/filenamefinder
 ```
 $ filenamefinder -h
 Usage of filenamefinder:
-  -k string
-        keyword(s) for the filename - can be comma delimited
   -p string
         absolute path - can be comma delimited
+  -k string
+        keyword(s) for the filename - can be comma delimited
 ```
 
-Example looking for all README files in $HOME and doing a count of matches:
+Example looking for all README files in $HOME and doing a count of matches (linux):
 
 ```
-$ time filenamefinder -k='README' -p="$HOME" | wc -l
+$ time filenamefinder -p="$HOME" -k='README' | wc -l
 4815
 
 real    0m1.389s
@@ -56,17 +55,15 @@ import (
 scankeywords := strings.Split("first_keyword,second_keyword", ",")
 scanPaths := strings.Split("/tmp,/etc,/home", ",")
 
-nfsf := filenamefinder.NewFileNameFinder(scanKeywords)
+nfnf := filenamefinder.NewFileNameFinder(scanKeywords)
 
-for _, path := range scanPaths {
-    nfsf.Scan(path)
-}
-
-for _, file := range nfsf.Files {
+for _, file := range nfnf.Files {
     fmt.Println(file)
 }
 ```
 
 ### Caveats
 
-Currently fuzzy find which I prefer. The rest can be narrowed down with grep or any other pipe freindly util.
+Currently fuzzy find which I prefer.
+
+The rest can be narrowed down with grep or any other pipe freindly util.
