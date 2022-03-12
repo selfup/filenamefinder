@@ -17,10 +17,10 @@ go install github.com/selfup/filenamefinder@latest
 ```
 $ filenamefinder -h
 Usage of filenamefinder:
-  -p string
-        absolute path - can be comma delimited
   -k string
         keyword(s) for the filename - can be comma delimited
+  -p string
+        absolute path - can be comma delimited
 ```
 
 Example looking for all README files in $HOME and doing a count of matches (linux):
@@ -56,6 +56,10 @@ scankeywords := strings.Split("first_keyword,second_keyword", ",")
 scanPaths := strings.Split("/tmp,/etc,/home", ",")
 
 nfnf := filenamefinder.NewFileNameFinder(scanKeywords)
+
+for _, path := range scanPaths {
+    nfnf.Scan(path)
+}
 
 for _, file := range nfnf.Files {
     fmt.Println(file)

@@ -17,16 +17,16 @@ func main() {
 
 	flag.Parse()
 
-	scanKeywords := strings.Split(keywords, ",")
 	scanPaths := strings.Split(paths, ",")
+	scanKeywords := strings.Split(keywords, ",")
 
-	nfsf := filenamefinder.NewFileNameFinder(scanKeywords)
+	nfnf := filenamefinder.NewFileNameFinder(scanKeywords)
 
 	for _, path := range scanPaths {
-		nfsf.Scan(path)
+		nfnf.Scan(path)
 	}
 
-	for _, file := range nfsf.Files {
+	for _, file := range nfnf.Files {
 		fmt.Println(file)
 	}
 }
