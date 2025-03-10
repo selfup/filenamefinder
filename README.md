@@ -1,3 +1,11 @@
+# ARCHIVED
+
+### Successor lives on!
+
+Please use [scnnr](https://github.com/selfup/scnnr) which has this mode built-in!
+
+scnnr: https://github.com/selfup/scnnr
+
 # File Name Finder
 
 Concurrent, recursive, file name finder.
